@@ -1,0 +1,41 @@
+{% comment %} Add this to your global CSS to keep it DRY (Sass) {% endcomment %}
+{% style %}
+// Responsive
+.u-desktop-only {
+  @include mq-max(768px) {
+    display: none !important;
+  }
+}
+.u-mobile-only {
+  @include mq(768px) {
+    display: none !important;
+  }
+}
+{% endstyle %}
+
+{% comment %} Add this liquid to your section class {% endcomment %}
+<section class="{% if section.settings.responsive == 'mobile' %}u-mobile-only {% endif %}{% if section.settings.responsive == 'desktop' %}u-desktop-only {% endif %}">
+  {% comment %} Your section content {% endcomment %}
+</section>
+
+{% comment %} Add this to your section schema {% endcomment %}
+{
+  "type": "select",
+  "id": "responsive",
+  "label": "Responsive",
+  "default": "default",
+  "options": [
+    {
+      "value": "default",
+      "label": "Default"
+    },
+    {
+      "value": "mobile",
+      "label": "Mobile only"
+    },
+    {
+      "value": "desktop",
+      "label": "Desktop only"
+    }
+  ]
+}
